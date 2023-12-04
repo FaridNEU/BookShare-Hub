@@ -14,7 +14,7 @@ public class LoanRequest {
     private User lender;
     private Book bookRequested;
     private String requestStatus; 
-
+    
     public LoanRequest(int requestId, User borrower, User lender, Book bookRequested, String requestStatus) {
         this.requestId = requestId;
         this.borrower = borrower;

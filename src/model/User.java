@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.List;
+import java.util.ArrayList;
 /**
  *
  * @author Farid
@@ -13,6 +15,9 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private List<Book> booksOwned;
+    private List<Book> booksBorrowed;
+
 
     public User(int userId, String username, String email, String password, String role) {
         this.userId = userId;
@@ -20,7 +25,43 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
+    //booksOwned Add
+    public void addBookToOwned(Book book) {
+        if (booksOwned == null) {
+            booksOwned = new ArrayList<>();
+        }
+        booksOwned.add(book);
+    }
+    //booksOwned Remove
+    public void removeBookFromOwned(Book book) {
+        if (booksOwned != null) {
+            booksOwned.remove(book);
+        }
+    }
+    //booksOwned View
+    public List<Book> viewOwnedBooks() {
+        return booksOwned;
+    }
+    
+    //booksBorrowed Add
+    public void addBookToBorrowed(Book book) {
+        if (booksBorrowed == null) {
+            booksBorrowed = new ArrayList<>();
+        }
+        booksBorrowed.add(book);
+    }
+    //booksBorrowed Remove
+    public void removeBookFromBorrowed(Book book) {
+        if (booksBorrowed != null) {
+            booksBorrowed.remove(book);
+        }
+    }
+    //booksBorrowed View
+    public List<Book> viewBorrowedBooks() {
+        return booksBorrowed;
+    }
+    
+    //Getter and Setter
     public void setUserId(int userId) {
         this.userId = userId;
     }
