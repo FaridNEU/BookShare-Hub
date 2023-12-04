@@ -10,16 +10,16 @@ package model;
  */
 public class LoanRequest {
     private int requestId;
-    private User borrower;
-    private User lender;
-    private Book bookRequested;
+    private int borrowerId;
+    private int lenderId;
+    private int bookRequestedId;
     private String requestStatus; 
     
-    public LoanRequest(int requestId, User borrower, User lender, Book bookRequested, String requestStatus) {
+    public LoanRequest(int requestId, int borrowerId, int lenderId, int bookRequestedId, String requestStatus) {
         this.requestId = requestId;
-        this.borrower = borrower;
-        this.lender = lender;
-        this.bookRequested = bookRequested;
+        this.borrowerId = borrowerId;
+        this.lenderId = lenderId;
+        this.bookRequestedId = bookRequestedId;
         this.requestStatus = requestStatus;
     }
 
@@ -27,16 +27,16 @@ public class LoanRequest {
         return requestId;
     }
 
-    public User getBorrower() {
-        return borrower;
+    public int getBorrowerId() {
+        return borrowerId;
     }
 
-    public User getLender() {
-        return lender;
+    public int getLenderId() {
+        return lenderId;
     }
 
-    public Book getBookRequested() {
-        return bookRequested;
+    public int getBookRequestedId() {
+        return bookRequestedId;
     }
 
     public String getRequestStatus() {
@@ -47,21 +47,20 @@ public class LoanRequest {
         this.requestId = requestId;
     }
 
-    public void setBorrower(User borrower) {
-        this.borrower = borrower;
+    public void setBorrowerId(int borrowerId) {
+        this.borrowerId = borrowerId;
     }
 
-    public void setLender(User lender) {
-        this.lender = lender;
+    public void setLenderId(int lenderId) {
+        this.lenderId = lenderId;
     }
 
-    public void setBookRequested(Book bookRequested) {
-        this.bookRequested = bookRequested;
+    public void setBookRequestedId(int bookRequestedId) {
+        this.bookRequestedId = bookRequestedId;
     }
 
     public void setRequestStatus(String requestStatus) {
         this.requestStatus = requestStatus;
     }
-    
-    
+
 }

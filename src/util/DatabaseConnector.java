@@ -87,7 +87,7 @@ public class DatabaseConnector {
     }
     
     
-    //removeBook(bookID)
+    //removeBook(bookID) OKEY
     public static void removeBook(Book book) {
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             String sql = "DELETE FROM Books WHERE book_id=?";
@@ -97,7 +97,7 @@ public class DatabaseConnector {
                 if (rowsAffected > 0) {
                     System.out.println("Book removed successfully!");
                 } else {
-                    System.out.println("Book with ID " + bookID + " not found.");
+                    System.out.println("Book with ID " + book.getBookId() + " not found.");
                 }
             }
         } catch (SQLException e) {
@@ -247,13 +247,133 @@ public class DatabaseConnector {
         return booksByAuthor;
     }
 
-    //getAllLoanRequestByUser(user)
-    //addLoanRequest(user, book, ownerUser)
-    //recieveLoanRequest(user)
-    //acceptLoanRequest(loanRequestID)
-    //denyLoanRequest(loanRequestID)
+////////////////////////////////////////////////////////////////////////////////////////////
+    //addLoanRequest(loanRequest) OKEY
+    public static void addLoanRequest(LoanRequest loanRequest) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "INSERT INTO LoanRequests (borrower_id, lender_id, book_id, request_status) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, loanRequest.getBorrowerId());
+                preparedStatement.setInt(2, loanRequest.getLenderId());
+                preparedStatement.setInt(3, loanRequest.getBookRequestedId());
+                preparedStatement.setString(4, loanRequest.getRequestStatus());
+                preparedStatement.executeUpdate();
+                System.out.println("Loan request added successfully!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
+    //removeLoanRequest(requestID)  OKEY
+    public static void removeLoanRequest(int requestID) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "DELETE FROM LoanRequests WHERE request_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, requestID);
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Loan request removed successfully!");
+                } else {
+                    System.out.println("Loan request with ID " + requestID + " not found.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //getAllLoanRequestByUser(user)   OKEY
+    public static List<LoanRequest> getAllLoanRequestsByUser(User user) {
+        List<LoanRequest> userLoanRequests = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT * FROM LoanRequests WHERE borrower_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, user.getUserId());
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int requestId = resultSet.getInt("request_id");
+                        int borrowerId = resultSet.getInt("borrower_id");
+                        int lenderId = resultSet.getInt("lender_id");
+                        int bookId = resultSet.getInt("book_id");
+                        String requestStatus = resultSet.getString("request_status");
+
+                        LoanRequest loanRequest = new LoanRequest(requestId, borrowerId, lenderId, bookId, requestStatus);
+                        userLoanRequests.add(loanRequest);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userLoanRequests;
+    }
+    
+    //recieveAllLoanRequestFromOtherUser(user)  OKEY
+    public static List<LoanRequest> recieveAllLoanRequestFromOtherUser(User user) {
+        List<LoanRequest> userLoanRequests = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT * FROM LoanRequests WHERE lender_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, user.getUserId());
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int requestId = resultSet.getInt("request_id");
+                        int borrowerId = resultSet.getInt("borrower_id");
+                        int lenderId = resultSet.getInt("lender_id");
+                        int bookId = resultSet.getInt("book_id");
+                        String requestStatus = resultSet.getString("request_status");
+
+                        LoanRequest loanRequest = new LoanRequest(requestId, borrowerId, lenderId, bookId, requestStatus);
+                        userLoanRequests.add(loanRequest);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userLoanRequests;
+    }
+    
+    //acceptLoanRequest(requestID)  OKEY
+    public static void acceptLoanRequest(int requestID) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "UPDATE LoanRequests SET request_status = 'approved' WHERE request_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, requestID);
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Loan request approved successfully!");
+                } else {
+                    System.out.println("Loan request with ID " + requestID + " not found.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //denyLoanRequest(requestID)  OKEY
+    public static void denyLoanRequest(int requestID) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "UPDATE LoanRequests SET request_status = 'denied' WHERE request_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, requestID);
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Loan request denied successfully!");
+                } else {
+                    System.out.println("Loan request with ID " + requestID + " not found.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //?
     //getUserBorrowedBook(user)
     //addUserBorrowedBook(user, book)
     //removeUserBorrowedBook(user, bookID)
     
+}
