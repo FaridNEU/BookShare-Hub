@@ -29,11 +29,81 @@ public class DatabaseConnector {
     private DatabaseConnector() {
     }
     
-    //addUser()
-    //updateUser()
-    //addBook(book)
-    //removeBook(book)
-        //getBookBy?
+    //addUser(user)  OKEY
+    public static void addUser(User user) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, user.getUsername());
+                preparedStatement.setString(2, user.getEmail());
+                preparedStatement.setString(3, user.getPassword());
+                preparedStatement.executeUpdate();
+                System.out.println("User added successfully!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //updateUser(oldUser, newUser)   OKEY
+    public static void updateUser(User oldUser, User newUser) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "UPDATE Users SET username=?, email=?, password=? WHERE user_id=?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, newUser.getUsername());
+                preparedStatement.setString(2, newUser.getEmail());
+                preparedStatement.setString(3, newUser.getPassword());
+                preparedStatement.setInt(4, oldUser.getUserId());
+                preparedStatement.executeUpdate();
+                System.out.println("User updated successfully!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //getAllUser() OKEY
+    public static List<User> getAllUsers() {
+        List<User> allUsers = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT * FROM Users";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int userId = resultSet.getInt("user_id");
+                        String username = resultSet.getString("username");
+                        String email = resultSet.getString("email");
+                        String password = resultSet.getString("password");
+
+                        User user = new User(userId, username, email, password);
+                        allUsers.add(user);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allUsers;
+    }
+    
+    
+    //removeBook(bookID)
+    public static void removeBook(Book book) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "DELETE FROM Books WHERE book_id=?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, book.getBookId());
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Book removed successfully!");
+                } else {
+                    System.out.println("Book with ID " + bookID + " not found.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     
     //addBook   OKEY
@@ -45,7 +115,7 @@ public class DatabaseConnector {
                 preparedStatement.setString(1, book.getTitle());
                 preparedStatement.setString(2, book.getAuthor());
                 preparedStatement.setString(3, book.getDescription());
-                preparedStatement.setBoolean(4, book.isAvailable());
+                preparedStatement.setBoolean(4, book.isAvailability());
                 preparedStatement.executeUpdate();
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 if (resultSet.next()) {
@@ -187,63 +257,3 @@ public class DatabaseConnector {
     //addUserBorrowedBook(user, book)
     //removeUserBorrowedBook(user, bookID)
     
-    public static ArrayList<User> getAllusers() {
-        // return list of users from db
-        ArrayList<User> users = new ArrayList<>();
-        String query = "SELECT * FROM Users";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME,PASSWORD)) {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                User u = new User();
-                u.setName(rs.getString("name"));
-                u.setAge(rs.getInt("age"));
-                u.setId(rs.getInt("id"));
-                users.add(u);
-            }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
-    
-    public static void addUser(User user) {
-        //add to database
-        String query = "INSERT INTO Users(NAME,AGE) VALUES(?,?)";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME,PASSWORD)) {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, user.getName());
-            stmt.setInt(2, user.getAge());
-            int rows = stmt.executeUpdate();
-            System.out.println("Rows impacted : " + rows);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-   
-
-    public static void deleteUser(User u) {
-        String query = "delete from Users where id = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME,PASSWORD)) {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, u.getId());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void editUser(User oldUser, User newUser) {
-        String query = "UPDATE Users SET name=?, age=? WHERE id=?";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME,PASSWORD)) {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, newUser.getName());
-            stmt.setInt(2, newUser.getAge());
-            stmt.setInt(3, oldUser.getId());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}

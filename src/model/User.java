@@ -19,7 +19,7 @@ public class User {
     private List<Book> booksBorrowed;
 
 
-    public User(int userId, String username, String email, String password, String role) {
+    public User(int userId, String username, String email, String password) {
         this.userId = userId;
         this.username = username;
         this.email = email;
