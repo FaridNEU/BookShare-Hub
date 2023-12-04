@@ -29,13 +29,44 @@ public class DatabaseConnector {
     private DatabaseConnector() {
     }
     
-        //addUserOwnedBook(user, book)
+    //addUser()
+    //updateUser()
+    //addBook(book)
+    //removeBook(book)
+        //getBookBy?
+    
+    
+    //addBook   OKEY
+    public static int addBook(Book book) {
+        int bookId = -1;
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "INSERT INTO Books (title, author, description, availability) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setString(1, book.getTitle());
+                preparedStatement.setString(2, book.getAuthor());
+                preparedStatement.setString(3, book.getDescription());
+                preparedStatement.setBoolean(4, book.isAvailable());
+                preparedStatement.executeUpdate();
+                ResultSet resultSet = preparedStatement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    bookId = resultSet.getInt(1);
+                    System.out.println("Book added successfully with ID: " + bookId);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookId;
+    }
+    
+    //addUserOwnedBook(user, book)  OKEY
     public static void addUserOwnedBook(User user, Book book) {
+        int bookID = addBook(book);
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             String sql = "INSERT INTO UserBooks (user_id, book_id) VALUES (?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, user.getUserId());
-                preparedStatement.setInt(2, book.getBookId());
+                preparedStatement.setInt(2, bookID);
                 preparedStatement.executeUpdate();
                 System.out.println("Book added to user's owned books successfully!");
             }
@@ -43,7 +74,7 @@ public class DatabaseConnector {
             e.printStackTrace();
         }
     }
-    //getUserOwnedBook(user)
+    //getUserOwnedBook(user)   OKEY
     public static List<Book> getUserOwnedBooks(User user) {
         List<Book> ownedBooks = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
@@ -69,7 +100,7 @@ public class DatabaseConnector {
         return ownedBooks;
     }
   
-    //getAllBook()
+    //getAllBook()  OKEY
     public static List<Book> getAllBooks() {
         List<Book> allBooks = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
@@ -94,20 +125,67 @@ public class DatabaseConnector {
         return allBooks;
     }
     
-    //browsBookByTitle(title)
+    //browsBookByTitle(title)  OKEY
+    public static List<Book> browseBookByTitle(String title) {
+        List<Book> booksWithTitle = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT * FROM Books WHERE title LIKE ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, "%" + title + "%");
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int bookId = resultSet.getInt("book_id");
+                        String bookTitle = resultSet.getString("title");
+                        String author = resultSet.getString("author");
+                        String description = resultSet.getString("description");
+                        boolean availability = resultSet.getBoolean("availability");
+
+                        Book book = new Book(bookId, bookTitle, author, description, availability);
+                        booksWithTitle.add(book);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return booksWithTitle;
+    }    
     
-    
-    
-    //browsBookByAuthor(author)
-    //getUserBorrowedBook(user)
-    //addUserBorrowedBook(user, book)
-    //removeUserBorrowedBook(user, bookID)
+    //browsBookByAuthor(author)  OKEY
+    public static List<Book> browseBookByAuthor(String author) {
+        List<Book> booksByAuthor = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT * FROM Books WHERE author LIKE ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, "%" + author + "%");
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int bookId = resultSet.getInt("book_id");
+                        String title = resultSet.getString("title");
+                        String bookAuthor = resultSet.getString("author");
+                        String description = resultSet.getString("description");
+                        boolean availability = resultSet.getBoolean("availability");
+
+                        Book book = new Book(bookId, title, bookAuthor, description, availability);
+                        booksByAuthor.add(book);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return booksByAuthor;
+    }
+
     //getAllLoanRequestByUser(user)
     //addLoanRequest(user, book, ownerUser)
     //recieveLoanRequest(user)
     //acceptLoanRequest(loanRequestID)
     //denyLoanRequest(loanRequestID)
     
+    //getUserBorrowedBook(user)
+    //addUserBorrowedBook(user, book)
+    //removeUserBorrowedBook(user, bookID)
     
     public static ArrayList<User> getAllusers() {
         // return list of users from db
