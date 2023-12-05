@@ -34,6 +34,8 @@ public class LoginFram extends javax.swing.JFrame {
         dashboardPanel.setVisible(false);
         addBookPanel.setVisible(false);
         browseBookPanel.setVisible(false);
+        lendRequestPanel.setVisible(false);
+        borrowedBookPanel.setVisible(false);
     }
 
     /**
@@ -109,6 +111,22 @@ public class LoginFram extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         loanRequestButton = new javax.swing.JButton();
+        browseBookBackButton = new javax.swing.JButton();
+        borrowedBookPanel = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        borrowedBookBackButton = new javax.swing.JButton();
+        lendRequestPanel = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        acceptButton = new javax.swing.JButton();
+        lendRequestBackButton = new javax.swing.JButton();
+        rejectButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(920, 620));
@@ -305,6 +323,11 @@ public class LoginFram extends javax.swing.JFrame {
         });
 
         myLendRequestButtonDashboard.setText("My Lend Request");
+        myLendRequestButtonDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myLendRequestButtonDashboardActionPerformed(evt);
+            }
+        });
 
         borrowedBookButtonDashboard.setText("Borrowed Book");
         borrowedBookButtonDashboard.addActionListener(new java.awt.event.ActionListener() {
@@ -321,6 +344,11 @@ public class LoginFram extends javax.swing.JFrame {
         });
 
         browseBookButtonDashboard.setText("Browse Book");
+        browseBookButtonDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseBookButtonDashboardActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("UserName: ");
 
@@ -375,35 +403,39 @@ public class LoginFram extends javax.swing.JFrame {
         dashboardPanelLayout.setHorizontalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dashboardPanelLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(31, 31, 31)
                 .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dashboardPanelLayout.createSequentialGroup()
-                        .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(dashboardPanelLayout.createSequentialGroup()
-                                .addComponent(addBookButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(removeBookButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashboardPanelLayout.createSequentialGroup()
-                                .addComponent(browseBookButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(borrowedBookButtonDashboard)
-                                .addGap(18, 18, 18)
-                                .addComponent(myLendRequestButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(logoutButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(dashboardPanelLayout.createSequentialGroup()
+                                        .addComponent(addBookButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(removeBookButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashboardPanelLayout.createSequentialGroup()
+                                        .addComponent(browseBookButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(borrowedBookButtonDashboard)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(myLendRequestButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(logoutButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(dashboardPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(30, 30, 30))
                     .addGroup(dashboardPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(19, 19, 19)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashboardPanelLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editButtonDashboard)
                     .addGroup(dashboardPanelLayout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -604,6 +636,13 @@ public class LoginFram extends javax.swing.JFrame {
 
         loanRequestButton.setText("Loan Request");
 
+        browseBookBackButton.setText("Back");
+        browseBookBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseBookBackButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout browseBookPanelLayout = new javax.swing.GroupLayout(browseBookPanel);
         browseBookPanel.setLayout(browseBookPanelLayout);
         browseBookPanelLayout.setHorizontalGroup(
@@ -633,7 +672,9 @@ public class LoginFram extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 44, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, browseBookPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(67, 67, 67)
+                .addComponent(browseBookBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(loanRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76))
         );
@@ -656,8 +697,192 @@ public class LoginFram extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(loanRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGroup(browseBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loanRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browseBookBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        borrowedBookPanel.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel20.setText("BookShare Hub");
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel21.setText("Borrowed Book");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "bookID", "Title", "Author", "Avalability"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jButton1.setText("Return Book");
+
+        borrowedBookBackButton.setText("Back");
+        borrowedBookBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrowedBookBackButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout borrowedBookPanelLayout = new javax.swing.GroupLayout(borrowedBookPanel);
+        borrowedBookPanel.setLayout(borrowedBookPanelLayout);
+        borrowedBookPanelLayout.setHorizontalGroup(
+            borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(borrowedBookPanelLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel21)
+                .addGap(80, 80, 80))
+            .addGroup(borrowedBookPanelLayout.createSequentialGroup()
+                .addGroup(borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, borrowedBookPanelLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(borrowedBookPanelLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(borrowedBookBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)))
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+        borrowedBookPanelLayout.setVerticalGroup(
+            borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(borrowedBookPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addGroup(borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrowedBookBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+
+        lendRequestPanel.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel22.setText("BookShare Hub");
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel23.setText("My Request");
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "bookID", "Title", "Author", "Avalability"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTable3);
+        if (jTable3.getColumnModel().getColumnCount() > 0) {
+            jTable3.getColumnModel().getColumn(0).setResizable(false);
+            jTable3.getColumnModel().getColumn(1).setResizable(false);
+            jTable3.getColumnModel().getColumn(2).setResizable(false);
+            jTable3.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        acceptButton.setText("Accept");
+
+        lendRequestBackButton.setText("Back");
+        lendRequestBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lendRequestBackButtonActionPerformed(evt);
+            }
+        });
+
+        rejectButton.setText("Reject");
+        rejectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rejectButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout lendRequestPanelLayout = new javax.swing.GroupLayout(lendRequestPanel);
+        lendRequestPanel.setLayout(lendRequestPanelLayout);
+        lendRequestPanelLayout.setHorizontalGroup(
+            lendRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lendRequestPanelLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel23)
+                .addGap(78, 78, 78))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lendRequestPanelLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(lendRequestBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(acceptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
+            .addGroup(lendRequestPanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+        lendRequestPanelLayout.setVerticalGroup(
+            lendRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lendRequestPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(lendRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addGroup(lendRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(acceptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lendRequestBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -681,7 +906,17 @@ public class LoginFram extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(browseBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browseBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(borrowedBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lendRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -703,7 +938,17 @@ public class LoginFram extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(browseBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browseBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(borrowedBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lendRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -772,6 +1017,8 @@ public class LoginFram extends javax.swing.JFrame {
 
     private void borrowedBookButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowedBookButtonDashboardActionPerformed
         // TODO add your handling code here:
+        dashboardPanel.setVisible(false);
+        borrowedBookPanel.setVisible(true);
     }//GEN-LAST:event_borrowedBookButtonDashboardActionPerformed
 
     private void backButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonAddBookActionPerformed
@@ -831,6 +1078,43 @@ public class LoginFram extends javax.swing.JFrame {
         usernameTextField.setText("");
         passwordTextField.setText("");
     }//GEN-LAST:event_logoutButtonDashboardActionPerformed
+
+    private void browseBookButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBookButtonDashboardActionPerformed
+        // TODO add your handling code here:
+        dashboardPanel.setVisible(false);
+        browseBookPanel.setVisible(true);
+    }//GEN-LAST:event_browseBookButtonDashboardActionPerformed
+
+    private void browseBookBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBookBackButtonActionPerformed
+        // TODO add your handling code here:
+        browseBookPanel.setVisible(false);
+        dashboardLoad();
+        dashboardPanel.setVisible(true);
+    }//GEN-LAST:event_browseBookBackButtonActionPerformed
+
+    private void borrowedBookBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowedBookBackButtonActionPerformed
+        // TODO add your handling code here:
+        borrowedBookPanel.setVisible(false);
+        dashboardLoad();
+        dashboardPanel.setVisible(true);
+    }//GEN-LAST:event_borrowedBookBackButtonActionPerformed
+
+    private void rejectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rejectButtonActionPerformed
+
+    private void myLendRequestButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myLendRequestButtonDashboardActionPerformed
+        // TODO add your handling code here:
+        dashboardPanel.setVisible(false);
+        lendRequestPanel.setVisible(true);
+    }//GEN-LAST:event_myLendRequestButtonDashboardActionPerformed
+
+    private void lendRequestBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lendRequestBackButtonActionPerformed
+        // TODO add your handling code here:
+        lendRequestPanel.setVisible(false);
+        dashboardLoad();
+        dashboardPanel.setVisible(true);
+    }//GEN-LAST:event_lendRequestBackButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -904,6 +1188,7 @@ public class LoginFram extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton acceptButton;
     private javax.swing.JButton addBookButtonDashboard;
     private javax.swing.JPanel addBookPanel;
     private javax.swing.JButton addButtonAddBook;
@@ -911,7 +1196,10 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JTextField authorTextFieldAddBook;
     private javax.swing.JButton backButton;
     private javax.swing.JButton backButtonAddBook;
+    private javax.swing.JButton borrowedBookBackButton;
     private javax.swing.JButton borrowedBookButtonDashboard;
+    private javax.swing.JPanel borrowedBookPanel;
+    private javax.swing.JButton browseBookBackButton;
     private javax.swing.JButton browseBookButtonDashboard;
     private javax.swing.JPanel browseBookPanel;
     private javax.swing.ButtonGroup buttonGroup;
@@ -921,6 +1209,7 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField emailTextFieldDashboard;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -933,6 +1222,10 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -944,7 +1237,13 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JButton lendRequestBackButton;
+    private javax.swing.JPanel lendRequestPanel;
     private javax.swing.JButton loanRequestButton;
     private javax.swing.JPanel logInPanel;
     private javax.swing.JButton loginButton;
@@ -957,6 +1256,7 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JTextField passwordTextFieldDashboard;
     private javax.swing.JButton registerButton;
     private javax.swing.JButton registerButton1;
+    private javax.swing.JButton rejectButton;
     private javax.swing.JButton removeBookButtonDashboard;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchTextField;
