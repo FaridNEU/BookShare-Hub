@@ -9,6 +9,8 @@ package ui;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Book;
 import model.User;
 import util.DatabaseConnector;
 
@@ -29,6 +31,8 @@ public class LoginFram extends javax.swing.JFrame {
     public LoginFram() {
         initComponents();
         jPanel1.setVisible(false);
+        dashboardPanel.setVisible(false);
+        addBookPanel.setVisible(false);
     }
 
     /**
@@ -79,8 +83,21 @@ public class LoginFram extends javax.swing.JFrame {
         userBookTable = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         removeBookButtonDashboard = new javax.swing.JButton();
+        addBookPanel = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        titleTextFieldAddBook = new javax.swing.JTextField();
+        authorTextFieldAddBook = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        descriptionTextAreaAddBook = new javax.swing.JTextArea();
+        backButtonAddBook = new javax.swing.JButton();
+        addButtonAddBook = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(920, 620));
 
         logInPanel.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -124,7 +141,7 @@ public class LoginFram extends javax.swing.JFrame {
                         .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logInPanelLayout.createSequentialGroup()
-                .addGap(0, 294, Short.MAX_VALUE)
+                .addGap(0, 315, Short.MAX_VALUE)
                 .addGroup(logInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(logInPanelLayout.createSequentialGroup()
                         .addGroup(logInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +177,7 @@ public class LoginFram extends javax.swing.JFrame {
                 .addGroup(logInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addContainerGap(850, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
@@ -213,7 +230,7 @@ public class LoginFram extends javax.swing.JFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 260, Short.MAX_VALUE)
+                .addGap(0, 281, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +272,7 @@ public class LoginFram extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registerButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         dashboardPanel.setBackground(new java.awt.Color(204, 255, 255));
@@ -333,25 +350,8 @@ public class LoginFram extends javax.swing.JFrame {
         dashboardPanel.setLayout(dashboardPanelLayout);
         dashboardPanelLayout.setHorizontalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashboardPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(editButtonDashboard)
-                    .addGroup(dashboardPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(usernameTextFieldDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(emailTextFieldDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(passwordTextFieldDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(55, 55, 55))
             .addGroup(dashboardPanelLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(32, 32, 32)
                 .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dashboardPanelLayout.createSequentialGroup()
                         .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,10 +373,27 @@ public class LoginFram extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30))
                     .addGroup(dashboardPanelLayout.createSequentialGroup()
-                        .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(38, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashboardPanelLayout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editButtonDashboard)
+                    .addGroup(dashboardPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(usernameTextFieldDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(emailTextFieldDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(passwordTextFieldDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(55, 55, 55))
         );
         dashboardPanelLayout.setVerticalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,19 +427,118 @@ public class LoginFram extends javax.swing.JFrame {
                 .addGap(66, 66, 66))
         );
 
+        addBookPanel.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel11.setText("BookShare Hub");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel12.setText("Add Book");
+
+        jLabel13.setText("Title: ");
+
+        jLabel14.setText("Author: ");
+
+        jLabel15.setText("Description: ");
+
+        descriptionTextAreaAddBook.setColumns(20);
+        descriptionTextAreaAddBook.setRows(5);
+        jScrollPane2.setViewportView(descriptionTextAreaAddBook);
+
+        backButtonAddBook.setText("Back");
+        backButtonAddBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonAddBookActionPerformed(evt);
+            }
+        });
+
+        addButtonAddBook.setText("Add");
+        addButtonAddBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonAddBookActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout addBookPanelLayout = new javax.swing.GroupLayout(addBookPanel);
+        addBookPanel.setLayout(addBookPanelLayout);
+        addBookPanelLayout.setHorizontalGroup(
+            addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addBookPanelLayout.createSequentialGroup()
+                .addGroup(addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addBookPanelLayout.createSequentialGroup()
+                        .addGap(263, 263, 263)
+                        .addGroup(addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15))
+                        .addGap(129, 129, 129)
+                        .addGroup(addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addComponent(authorTextFieldAddBook)
+                            .addComponent(titleTextFieldAddBook)))
+                    .addGroup(addBookPanelLayout.createSequentialGroup()
+                        .addGap(325, 325, 325)
+                        .addComponent(backButtonAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(addButtonAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(179, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addBookPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addBookPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(343, 343, 343))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addBookPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(381, 381, 381))))
+        );
+        addBookPanelLayout.setVerticalGroup(
+            addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addBookPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12)
+                .addGroup(addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addBookPanelLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(titleTextFieldAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(authorTextFieldAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(200, Short.MAX_VALUE))
+                    .addGroup(addBookPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(addBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(backButtonAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addButtonAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(136, 136, 136))))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(dashboardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(logInPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(addBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
@@ -437,6 +553,10 @@ public class LoginFram extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(logInPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(addBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 645, Short.MAX_VALUE)))
         );
 
         pack();
@@ -485,9 +605,9 @@ public class LoginFram extends javax.swing.JFrame {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 loggedInUser = user;
                 logInPanel.setVisible(false);
-                System.out.println(loggedInUser.getUserId());
-                //dashboardPanel.setVisible(true);
-                
+                //System.out.println(loggedInUser.getUserId());
+                dashboardLoad();
+                dashboardPanel.setVisible(true);
                 flag = true;
             }
         }
@@ -498,11 +618,39 @@ public class LoginFram extends javax.swing.JFrame {
 
     private void addBookButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookButtonDashboardActionPerformed
         // TODO add your handling code here:
+        dashboardPanel.setVisible(false);
+        addBookPanel.setVisible(true);
     }//GEN-LAST:event_addBookButtonDashboardActionPerformed
 
     private void borrowedBookButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowedBookButtonDashboardActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_borrowedBookButtonDashboardActionPerformed
+
+    private void backButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonAddBookActionPerformed
+        // TODO add your handling code here:
+        addBookPanel.setVisible(false);
+        dashboardLoad();
+        dashboardPanel.setVisible(true);
+    }//GEN-LAST:event_backButtonAddBookActionPerformed
+
+    private void addButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonAddBookActionPerformed
+        // TODO add your handling code here:
+        try{
+            if (isValid_input_addBook() == 0){
+                Book newBook = new Book(0, titleTextFieldAddBook.getText(), authorTextFieldAddBook.getText(), descriptionTextAreaAddBook.getText(), true);
+                DatabaseConnector.addUserOwnedBook(loggedInUser, newBook);
+                JOptionPane.showMessageDialog(null, "Book Added Successfully", "Add Book", HEIGHT);
+                addBookPanel.setVisible(false);
+                dashboardLoad();
+                dashboardPanel.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Please input all section correctly!", "Add Book", HEIGHT);
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage());
+        }
+    }//GEN-LAST:event_addButtonAddBookActionPerformed
 
     /**
      * @param args the command line arguments
@@ -545,22 +693,58 @@ public class LoginFram extends javax.swing.JFrame {
         passwordTextField1.setText("");
     }
     
+    public int isValid_input_addBook(){
+        return 0;
+    }
+    
     public int isValid_input(){
         return 0;
+    }
+    
+    public void dashboardLoad(){
+        usernameTextFieldDashboard.setText(loggedInUser.getUsername());
+        emailTextFieldDashboard.setText(loggedInUser.getEmail());
+        passwordTextFieldDashboard.setText(loggedInUser.getPassword());
+        
+        try{
+            List<Book> userBooks = DatabaseConnector.getUserOwnedBooks(loggedInUser.getUserId());
+            DefaultTableModel model = (DefaultTableModel) userBookTable.getModel();
+            model.setRowCount(0);
+            for(Book book : userBooks){
+                Object[] row = new Object[4];
+                row[0] = book.getBookId();
+                row[1] = book.getTitle();
+                row[2] = book.getAuthor();
+                row[3] = book.isAvailability();
+                model.addRow(row);
+            }
+        } catch( Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage());            
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBookButtonDashboard;
+    private javax.swing.JPanel addBookPanel;
+    private javax.swing.JButton addButtonAddBook;
+    private javax.swing.JTextField authorTextFieldAddBook;
     private javax.swing.JButton backButton;
+    private javax.swing.JButton backButtonAddBook;
     private javax.swing.JButton borrowedBookButtonDashboard;
     private javax.swing.JButton browseBookButtonDashboard;
     private javax.swing.JPanel dashboardPanel;
+    private javax.swing.JTextArea descriptionTextAreaAddBook;
     private javax.swing.JButton editButtonDashboard;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField emailTextFieldDashboard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -571,6 +755,7 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel logInPanel;
     private javax.swing.JButton loginButton;
     private javax.swing.JButton logoutButtonDashboard;
@@ -583,6 +768,7 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JButton registerButton;
     private javax.swing.JButton registerButton1;
     private javax.swing.JButton removeBookButtonDashboard;
+    private javax.swing.JTextField titleTextFieldAddBook;
     private javax.swing.JTable userBookTable;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JLabel usernameLabel1;

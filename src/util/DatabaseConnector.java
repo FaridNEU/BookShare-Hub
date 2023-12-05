@@ -374,6 +374,37 @@ public class DatabaseConnector {
         }
     }
     
+    
+    public static List<Book> getUserOwnedBooks(int userId) {
+        List<Book> userBooks = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT b.book_id, b.title, b.author, b.description, b.availability " +
+                         "FROM Books b " +
+                         "JOIN UserBooks ub ON b.book_id = ub.book_id " +
+                         "WHERE ub.user_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, userId);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int bookId = resultSet.getInt("book_id");
+                        String title = resultSet.getString("title");
+                        String author = resultSet.getString("author");
+                        String description = resultSet.getString("description");
+                        boolean availability = resultSet.getBoolean("availability");
+
+                        Book book = new Book(bookId, title, author, description, availability);
+                        userBooks.add(book);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userBooks;
+    }
+    
     //?
     //getUserBorrowedBook(user)
     //addUserBorrowedBook(user, book)
