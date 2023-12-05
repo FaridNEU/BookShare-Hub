@@ -33,6 +33,7 @@ public class LoginFram extends javax.swing.JFrame {
         jPanel1.setVisible(false);
         dashboardPanel.setVisible(false);
         addBookPanel.setVisible(false);
+        browseBookPanel.setVisible(false);
     }
 
     /**
@@ -44,6 +45,7 @@ public class LoginFram extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup = new javax.swing.ButtonGroup();
         logInPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -95,6 +97,18 @@ public class LoginFram extends javax.swing.JFrame {
         descriptionTextAreaAddBook = new javax.swing.JTextArea();
         backButtonAddBook = new javax.swing.JButton();
         addButtonAddBook = new javax.swing.JButton();
+        browseBookPanel = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        titleRadioButton = new javax.swing.JRadioButton();
+        authorRadioButton = new javax.swing.JRadioButton();
+        jLabel19 = new javax.swing.JLabel();
+        searchTextField = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        loanRequestButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(920, 620));
@@ -284,6 +298,11 @@ public class LoginFram extends javax.swing.JFrame {
         jLabel6.setText("Dashboard");
 
         logoutButtonDashboard.setText("Logout");
+        logoutButtonDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonDashboardActionPerformed(evt);
+            }
+        });
 
         myLendRequestButtonDashboard.setText("My Lend Request");
 
@@ -345,6 +364,11 @@ public class LoginFram extends javax.swing.JFrame {
         jLabel10.setText("List of your books:");
 
         removeBookButtonDashboard.setText("Remove Book");
+        removeBookButtonDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeBookButtonDashboardActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
         dashboardPanel.setLayout(dashboardPanelLayout);
@@ -522,6 +546,120 @@ public class LoginFram extends javax.swing.JFrame {
                         .addGap(136, 136, 136))))
         );
 
+        browseBookPanel.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel16.setText("BookShare Hub");
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel17.setText("Browse Book");
+
+        jLabel18.setText("Search By: ");
+
+        buttonGroup.add(titleRadioButton);
+        titleRadioButton.setText("Title");
+        titleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup.add(authorRadioButton);
+        authorRadioButton.setText("Author");
+
+        jLabel19.setText("Input: ");
+
+        searchButton.setText("Search");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "bookID", "Title", "Author", "Avalability"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        loanRequestButton.setText("Loan Request");
+
+        javax.swing.GroupLayout browseBookPanelLayout = new javax.swing.GroupLayout(browseBookPanel);
+        browseBookPanel.setLayout(browseBookPanelLayout);
+        browseBookPanelLayout.setHorizontalGroup(
+            browseBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(browseBookPanelLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addGroup(browseBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(browseBookPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(26, 26, 26)
+                        .addGroup(browseBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(authorRadioButton)
+                            .addGroup(browseBookPanelLayout.createSequentialGroup()
+                                .addComponent(titleRadioButton)
+                                .addGap(115, 115, 115)
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(browseBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(82, 82, 82))
+            .addGroup(browseBookPanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 44, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, browseBookPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loanRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
+        );
+        browseBookPanelLayout.setVerticalGroup(
+            browseBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(browseBookPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(browseBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(23, 23, 23)
+                .addGroup(browseBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(titleRadioButton)
+                    .addComponent(jLabel19)
+                    .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(authorRadioButton)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(loanRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -540,6 +678,11 @@ public class LoginFram extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(addBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(browseBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -557,6 +700,11 @@ public class LoginFram extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(addBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 645, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(browseBookPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -652,6 +800,38 @@ public class LoginFram extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addButtonAddBookActionPerformed
 
+    private void titleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_titleRadioButtonActionPerformed
+
+    private void removeBookButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBookButtonDashboardActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = userBookTable.getSelectedRow();
+        if(selectedIndex == -1){
+            JOptionPane.showMessageDialog(null, "Please select a book to remove", "Remove", HEIGHT);            
+            return;
+        }
+        try{
+            List<Book> userBooks = DatabaseConnector.getUserOwnedBooks(loggedInUser.getUserId());
+            Book selectedBook = userBooks.get(selectedIndex);
+            DatabaseConnector.removeBook(selectedBook);
+            JOptionPane.showMessageDialog(null, "Book Deleted Successfully", "Remove", HEIGHT);
+            dashboardLoad();
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage());
+
+        }
+    }//GEN-LAST:event_removeBookButtonDashboardActionPerformed
+
+    private void logoutButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonDashboardActionPerformed
+        // TODO add your handling code here:
+        dashboardPanel.setVisible(false);
+        loggedInUser = null;
+        logInPanel.setVisible(true);
+        usernameTextField.setText("");
+        passwordTextField.setText("");
+    }//GEN-LAST:event_logoutButtonDashboardActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -727,11 +907,14 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JButton addBookButtonDashboard;
     private javax.swing.JPanel addBookPanel;
     private javax.swing.JButton addButtonAddBook;
+    private javax.swing.JRadioButton authorRadioButton;
     private javax.swing.JTextField authorTextFieldAddBook;
     private javax.swing.JButton backButton;
     private javax.swing.JButton backButtonAddBook;
     private javax.swing.JButton borrowedBookButtonDashboard;
     private javax.swing.JButton browseBookButtonDashboard;
+    private javax.swing.JPanel browseBookPanel;
+    private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JTextArea descriptionTextAreaAddBook;
     private javax.swing.JButton editButtonDashboard;
@@ -745,6 +928,10 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -756,6 +943,9 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton loanRequestButton;
     private javax.swing.JPanel logInPanel;
     private javax.swing.JButton loginButton;
     private javax.swing.JButton logoutButtonDashboard;
@@ -768,6 +958,9 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JButton registerButton;
     private javax.swing.JButton registerButton1;
     private javax.swing.JButton removeBookButtonDashboard;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchTextField;
+    private javax.swing.JRadioButton titleRadioButton;
     private javax.swing.JTextField titleTextFieldAddBook;
     private javax.swing.JTable userBookTable;
     private javax.swing.JLabel usernameLabel;

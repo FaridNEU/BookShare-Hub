@@ -93,10 +93,18 @@ public class DatabaseConnector {
     //removeBook(bookID) OKEY
     public static void removeBook(Book book) {
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            String sql = "DELETE FROM Books WHERE book_id=?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setInt(1, book.getBookId());
-                int rowsAffected = preparedStatement.executeUpdate();
+            // First, delete references from UserBooks table
+            String deleteUserBooksSQL = "DELETE FROM UserBooks WHERE book_id=?";
+            try (PreparedStatement deleteUserBooksStatement = connection.prepareStatement(deleteUserBooksSQL)) {
+                deleteUserBooksStatement.setInt(1, book.getBookId());
+                deleteUserBooksStatement.executeUpdate();
+            }
+
+            // Then, delete the book from the Books table
+            String deleteBookSQL = "DELETE FROM Books WHERE book_id=?";
+            try (PreparedStatement deleteBookStatement = connection.prepareStatement(deleteBookSQL)) {
+                deleteBookStatement.setInt(1, book.getBookId());
+                int rowsAffected = deleteBookStatement.executeUpdate();
                 if (rowsAffected > 0) {
                     System.out.println("Book removed successfully!");
                 } else {
