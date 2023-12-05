@@ -5,6 +5,9 @@
 package ui;
 
 
+
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.User;
 import util.DatabaseConnector;
@@ -15,6 +18,10 @@ import util.DatabaseConnector;
  */
 public class LoginFram extends javax.swing.JFrame {
 
+
+        
+    //List<User> userList = new ArrayList<>();
+    User loggedInUser;
     /**
      * Creates new form LoginFram
      */
@@ -70,6 +77,11 @@ public class LoginFram extends javax.swing.JFrame {
 
         loginButton.setBackground(new java.awt.Color(204, 204, 204));
         loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
 
         registerButton.setBackground(new java.awt.Color(204, 204, 204));
         registerButton.setText("Register");
@@ -279,12 +291,9 @@ public class LoginFram extends javax.swing.JFrame {
 
     private void registerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButton1ActionPerformed
         // TODO add your handling code here:
-        System.out.println("I'm Here! register");
         try{
             if (isValid_input() == 0){
-                System.out.println("I'm Here! valid");
                 User newUser = new User(0, usernameTextField1.getText(), emailTextField.getText(), passwordTextField1.getText());
-                System.out.println("I'm Here! newUser");
                 DatabaseConnector.addUser(newUser);
                 JOptionPane.showMessageDialog(null, "User Created Successfully", "Create User", HEIGHT);
                 cleanUpRegister();
@@ -296,6 +305,27 @@ public class LoginFram extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,e.getMessage());
         }
     }//GEN-LAST:event_registerButton1ActionPerformed
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        // TODO add your handling code here:
+        String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
+        List<User> userList = DatabaseConnector.getAllUsers();
+        boolean flag = false;
+        for (User user : userList) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                loggedInUser = user;
+                logInPanel.setVisible(false);
+                System.out.println("logIn");
+                //dashboardPanel.setVisible(true);
+                
+                flag = true;
+            }
+        }
+        if(flag == false)
+            JOptionPane.showMessageDialog(null, "Wrong username or password!!", "Log In", HEIGHT);
+                
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
