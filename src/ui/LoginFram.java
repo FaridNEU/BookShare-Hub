@@ -109,7 +109,7 @@ public class LoginFram extends javax.swing.JFrame {
         searchTextField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        searchTable = new javax.swing.JTable();
         loanRequestButton = new javax.swing.JButton();
         browseBookBackButton = new javax.swing.JButton();
         borrowedBookPanel = new javax.swing.JPanel();
@@ -589,7 +589,9 @@ public class LoginFram extends javax.swing.JFrame {
         jLabel18.setText("Search By: ");
 
         buttonGroup.add(titleRadioButton);
+        titleRadioButton.setSelected(true);
         titleRadioButton.setText("Title");
+        titleRadioButton.setActionCommand("1");
         titleRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 titleRadioButtonActionPerformed(evt);
@@ -598,12 +600,18 @@ public class LoginFram extends javax.swing.JFrame {
 
         buttonGroup.add(authorRadioButton);
         authorRadioButton.setText("Author");
+        authorRadioButton.setActionCommand("2");
 
         jLabel19.setText("Input: ");
 
         searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        searchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -626,15 +634,20 @@ public class LoginFram extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane3.setViewportView(searchTable);
+        if (searchTable.getColumnModel().getColumnCount() > 0) {
+            searchTable.getColumnModel().getColumn(0).setResizable(false);
+            searchTable.getColumnModel().getColumn(1).setResizable(false);
+            searchTable.getColumnModel().getColumn(2).setResizable(false);
+            searchTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         loanRequestButton.setText("Loan Request");
+        loanRequestButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loanRequestButtonActionPerformed(evt);
+            }
+        });
 
         browseBookBackButton.setText("Back");
         browseBookBackButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1036,6 +1049,9 @@ public class LoginFram extends javax.swing.JFrame {
                 DatabaseConnector.addUserOwnedBook(loggedInUser, newBook);
                 JOptionPane.showMessageDialog(null, "Book Added Successfully", "Add Book", HEIGHT);
                 addBookPanel.setVisible(false);
+                titleTextFieldAddBook.setText("");
+                authorTextFieldAddBook.setText("");
+                descriptionTextAreaAddBook.setText("");
                 dashboardLoad();
                 dashboardPanel.setVisible(true);
             }
@@ -1082,6 +1098,9 @@ public class LoginFram extends javax.swing.JFrame {
     private void browseBookButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBookButtonDashboardActionPerformed
         // TODO add your handling code here:
         dashboardPanel.setVisible(false);
+        DefaultTableModel model = (DefaultTableModel) searchTable.getModel();
+        model.setRowCount(0);
+        searchTextField.setText("");
         browseBookPanel.setVisible(true);
     }//GEN-LAST:event_browseBookButtonDashboardActionPerformed
 
@@ -1115,6 +1134,62 @@ public class LoginFram extends javax.swing.JFrame {
         dashboardLoad();
         dashboardPanel.setVisible(true);
     }//GEN-LAST:event_lendRequestBackButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        
+        // SEARCH
+        String searchBy = buttonGroup.getSelection().getActionCommand();
+        System.out.println(searchBy);
+        if (searchBy == "1"){
+            try{
+                List<Book> userBooks = DatabaseConnector.browseBookByTitle(searchTextField.getText());
+                DefaultTableModel model = (DefaultTableModel) searchTable.getModel();
+                model.setRowCount(0);
+                for(Book book : userBooks){
+                    Object[] row = new Object[4];
+                    row[0] = book.getBookId();
+                    row[1] = book.getTitle();
+                    row[2] = book.getAuthor();
+                    row[3] = book.isAvailability();
+                    model.addRow(row);
+                }
+            } catch( Exception e){
+                JOptionPane.showMessageDialog(this,e.getMessage());            
+            }
+        }
+        else if(searchBy == "2"){
+            try{
+                List<Book> userBooks = DatabaseConnector.browseBookByAuthor(searchTextField.getText());
+                DefaultTableModel model = (DefaultTableModel) searchTable.getModel();
+                model.setRowCount(0);
+                for(Book book : userBooks){
+                    Object[] row = new Object[4];
+                    row[0] = book.getBookId();
+                    row[1] = book.getTitle();
+                    row[2] = book.getAuthor();
+                    row[3] = book.isAvailability();
+                    model.addRow(row);
+                }
+            } catch( Exception e){
+                JOptionPane.showMessageDialog(this,e.getMessage());            
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Chose one field Title or Author", "Search", HEIGHT);
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void loanRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loanRequestButtonActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_loanRequestButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1239,7 +1314,6 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JButton lendRequestBackButton;
@@ -1259,6 +1333,7 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JButton rejectButton;
     private javax.swing.JButton removeBookButtonDashboard;
     private javax.swing.JButton searchButton;
+    private javax.swing.JTable searchTable;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JRadioButton titleRadioButton;
     private javax.swing.JTextField titleTextFieldAddBook;
