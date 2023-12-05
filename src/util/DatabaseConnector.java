@@ -22,7 +22,7 @@ import model.LibraryCatalog;
  * @author Farid
  */
 public class DatabaseConnector {
-    private static final String URL = "jdbc:mysql://localhost:3306/test?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3306/bookShare?useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "2250";
 
@@ -31,12 +31,15 @@ public class DatabaseConnector {
     
     //addUser(user)  OKEY
     public static void addUser(User user) {
+        System.out.println("I'm Here! addUser");
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            String sql = "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
+            System.out.println("I'm Here! db");
+            String sql = "INSERT INTO Users (username, email, password, role) VALUES (?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, user.getUsername());
                 preparedStatement.setString(2, user.getEmail());
                 preparedStatement.setString(3, user.getPassword());
+                preparedStatement.setString(4, "Normal");
                 preparedStatement.executeUpdate();
                 System.out.println("User added successfully!");
             }
