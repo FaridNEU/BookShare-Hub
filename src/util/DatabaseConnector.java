@@ -413,6 +413,36 @@ public class DatabaseConnector {
         return userBooks;
     }
     
+    
+    public static User getUserByBook(int bookId) {
+        User userWithBook = null;
+
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT u.user_id, u.username, u.email, u.password, u.role " +
+                         "FROM Users u " +
+                         "JOIN UserBooks ub ON u.user_id = ub.user_id " +
+                         "WHERE ub.book_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, bookId);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        int userId = resultSet.getInt("user_id");
+                        String username = resultSet.getString("username");
+                        String email = resultSet.getString("email");
+                        String password = resultSet.getString("password");
+                        String role = resultSet.getString("role");
+
+                        userWithBook = new User(userId, username, email, password);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userWithBook;
+    }
+    
     //?
     //getUserBorrowedBook(user)
     //addUserBorrowedBook(user, book)

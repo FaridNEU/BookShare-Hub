@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Book;
+import model.LoanRequest;
 import model.User;
 import util.DatabaseConnector;
 
@@ -24,6 +25,7 @@ public class LoginFram extends javax.swing.JFrame {
         
     //List<User> userList = new ArrayList<>();
     User loggedInUser;
+    List<Book> searchBooks;
     /**
      * Creates new form LoginFram
      */
@@ -1143,10 +1145,10 @@ public class LoginFram extends javax.swing.JFrame {
         System.out.println(searchBy);
         if (searchBy == "1"){
             try{
-                List<Book> userBooks = DatabaseConnector.browseBookByTitle(searchTextField.getText());
+                searchBooks = DatabaseConnector.browseBookByTitle(searchTextField.getText());
                 DefaultTableModel model = (DefaultTableModel) searchTable.getModel();
                 model.setRowCount(0);
-                for(Book book : userBooks){
+                for(Book book : searchBooks){
                     Object[] row = new Object[4];
                     row[0] = book.getBookId();
                     row[1] = book.getTitle();
@@ -1160,10 +1162,10 @@ public class LoginFram extends javax.swing.JFrame {
         }
         else if(searchBy == "2"){
             try{
-                List<Book> userBooks = DatabaseConnector.browseBookByAuthor(searchTextField.getText());
+                searchBooks = DatabaseConnector.browseBookByAuthor(searchTextField.getText());
                 DefaultTableModel model = (DefaultTableModel) searchTable.getModel();
                 model.setRowCount(0);
-                for(Book book : userBooks){
+                for(Book book : searchBooks){
                     Object[] row = new Object[4];
                     row[0] = book.getBookId();
                     row[1] = book.getTitle();
@@ -1182,13 +1184,17 @@ public class LoginFram extends javax.swing.JFrame {
 
     private void loanRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loanRequestButtonActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
-        
-        
-        
+        int selectedIndex = searchTable.getSelectedRow();
+        Book selectedBook = searchBooks.get(selectedIndex);
+        int bookRequestedId = selectedBook.getBookId();
+        User lenderUser = DatabaseConnector.getUserByBook(selectedBook.getBookId());
+        LoanRequest loanRequest = new LoanRequest(0, loggedInUser.getUserId(),lenderUser.getUserId() ,bookRequestedId, "Pending");
+        try{
+            DatabaseConnector.addLoanRequest(loanRequest);
+            JOptionPane.showMessageDialog(null, "Your request create succesfully", "Loan Request", HEIGHT);
+        } catch( Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage());            
+        }
     }//GEN-LAST:event_loanRequestButtonActionPerformed
 
     /**
