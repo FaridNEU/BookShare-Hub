@@ -298,7 +298,7 @@ public class DatabaseConnector {
     public static List<LoanRequest> getAllLoanRequestsByUser(User user) {
         List<LoanRequest> userLoanRequests = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            String sql = "SELECT * FROM LoanRequests WHERE borrower_id = ?";
+            String sql = "SELECT * FROM LoanRequests WHERE borrower_id = ? AND request_status = 'Approve'";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, user.getUserId());
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -324,7 +324,7 @@ public class DatabaseConnector {
     public static List<LoanRequest> recieveAllLoanRequestFromOtherUser(User user) {
         List<LoanRequest> userLoanRequests = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            String sql = "SELECT * FROM LoanRequests WHERE lender_id = ?";
+            String sql = "SELECT * FROM LoanRequests WHERE lender_id = ? AND request_status = 'Pending'";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, user.getUserId());
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -441,6 +441,47 @@ public class DatabaseConnector {
         }
 
         return userWithBook;
+    }
+    
+    public static Book getBookById(int bookId) {
+        Book book = null;
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT * FROM Books WHERE book_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, bookId);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        String title = resultSet.getString("title");
+                        String author = resultSet.getString("author");
+                        String description = resultSet.getString("description");
+                        boolean availability = resultSet.getBoolean("availability");
+
+                        book = new Book(bookId, title, author, description, availability);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
+    
+    public static void changeLoanRequestStatus(LoanRequest loanRequest, String newStatus) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String sql = "UPDATE LoanRequests SET request_status = ? WHERE request_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, newStatus);
+                preparedStatement.setInt(2, loanRequest.getRequestId());
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Loan request status updated successfully!");
+                } else {
+                    System.out.println("Loan request with ID " + loanRequest.getRequestId() + " not found.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
     //?

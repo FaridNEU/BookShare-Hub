@@ -1116,8 +1116,8 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                      <Title/>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title value="Author"/>
                       <Editor/>
                       <Renderer/>
                     </Column>
@@ -1228,23 +1228,17 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable3">
+            <Component class="javax.swing.JTable" name="requestTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="0">
-                    <Column editable="false" title="bookID" type="java.lang.Integer"/>
+                  <Table columnCount="3" rowCount="0">
+                    <Column editable="false" title="requestID" type="java.lang.Integer"/>
                     <Column editable="false" title="Title" type="java.lang.String"/>
-                    <Column editable="false" title="Author" type="java.lang.String"/>
-                    <Column editable="false" title="Avalability" type="java.lang.Boolean"/>
+                    <Column editable="false" title="Status" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
@@ -1273,6 +1267,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Accept"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acceptButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="lendRequestBackButton">
           <Properties>

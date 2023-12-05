@@ -125,7 +125,7 @@ public class LoginFram extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        requestTable = new javax.swing.JTable();
         acceptButton = new javax.swing.JButton();
         lendRequestBackButton = new javax.swing.JButton();
         rejectButton = new javax.swing.JButton();
@@ -753,7 +753,7 @@ public class LoginFram extends javax.swing.JFrame {
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setHeaderValue("Author");
             jTable2.getColumnModel().getColumn(3).setResizable(false);
         }
 
@@ -813,19 +813,19 @@ public class LoginFram extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel23.setText("My Request");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "bookID", "Title", "Author", "Avalability"
+                "requestID", "Title", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -836,15 +836,19 @@ public class LoginFram extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setResizable(false);
-            jTable3.getColumnModel().getColumn(1).setResizable(false);
-            jTable3.getColumnModel().getColumn(2).setResizable(false);
-            jTable3.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane5.setViewportView(requestTable);
+        if (requestTable.getColumnModel().getColumnCount() > 0) {
+            requestTable.getColumnModel().getColumn(0).setResizable(false);
+            requestTable.getColumnModel().getColumn(1).setResizable(false);
+            requestTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
         acceptButton.setText("Accept");
+        acceptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptButtonActionPerformed(evt);
+            }
+        });
 
         lendRequestBackButton.setText("Back");
         lendRequestBackButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1122,11 +1126,25 @@ public class LoginFram extends javax.swing.JFrame {
 
     private void rejectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectButtonActionPerformed
         // TODO add your handling code here:
+        try{
+            List<LoanRequest> loanRequests = DatabaseConnector.recieveAllLoanRequestFromOtherUser(loggedInUser);
+            int selectedIndex = requestTable.getSelectedRow();
+            LoanRequest loanRequest = loanRequests.get(selectedIndex);
+            DatabaseConnector.changeLoanRequestStatus(loanRequest, "Denied");
+            requestTableLoad();
+            JOptionPane.showMessageDialog(null, "Request Rejected!", "Loan Request", HEIGHT);
+        } catch( Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage());            
+        }
+        
+        
+        
     }//GEN-LAST:event_rejectButtonActionPerformed
 
     private void myLendRequestButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myLendRequestButtonDashboardActionPerformed
         // TODO add your handling code here:
         dashboardPanel.setVisible(false);
+        requestTableLoad();
         lendRequestPanel.setVisible(true);
     }//GEN-LAST:event_myLendRequestButtonDashboardActionPerformed
 
@@ -1196,6 +1214,21 @@ public class LoginFram extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,e.getMessage());            
         }
     }//GEN-LAST:event_loanRequestButtonActionPerformed
+
+    private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
+        // TODO add your handling code here:
+        try{
+            List<LoanRequest> loanRequests = DatabaseConnector.recieveAllLoanRequestFromOtherUser(loggedInUser);
+            int selectedIndex = requestTable.getSelectedRow();
+            LoanRequest loanRequest = loanRequests.get(selectedIndex);
+            DatabaseConnector.changeLoanRequestStatus(loanRequest, "Approved");
+            requestTableLoad();
+            JOptionPane.showMessageDialog(null, "Request Approved!", "Loan Request", HEIGHT);
+        } catch( Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage());            
+        }
+        
+    }//GEN-LAST:event_acceptButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1267,6 +1300,25 @@ public class LoginFram extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,e.getMessage());            
         }
     }
+    
+    public void requestTableLoad(){
+        try{
+            List<LoanRequest> loanRequests = DatabaseConnector.recieveAllLoanRequestFromOtherUser(loggedInUser);
+            DefaultTableModel model = (DefaultTableModel) requestTable.getModel();
+            model.setRowCount(0);
+            for(LoanRequest loanRequest : loanRequests){
+                Object[] row = new Object[4];
+                int bookId = loanRequest.getBookRequestedId();
+                Book book = DatabaseConnector.getBookById(bookId);
+                row[0] = loanRequest.getBookRequestedId();
+                row[1] = book.getTitle();
+                row[2] = loanRequest.getRequestStatus();
+                model.addRow(row);
+            }
+        } catch( Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage());            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceptButton;
@@ -1321,7 +1373,6 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JButton lendRequestBackButton;
     private javax.swing.JPanel lendRequestPanel;
     private javax.swing.JButton loanRequestButton;
@@ -1338,6 +1389,7 @@ public class LoginFram extends javax.swing.JFrame {
     private javax.swing.JButton registerButton1;
     private javax.swing.JButton rejectButton;
     private javax.swing.JButton removeBookButtonDashboard;
+    private javax.swing.JTable requestTable;
     private javax.swing.JButton searchButton;
     private javax.swing.JTable searchTable;
     private javax.swing.JTextField searchTextField;
